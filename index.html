@@ -1,0 +1,549 @@
+
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Biblioteca Visual</title>
+
+    <style>
+
+        /* Estilo do Corpo */
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #141414;
+
+            color: #fff;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+        header {
+
+            background-color: #e50914;
+
+            padding: 20px;
+
+            text-align: center;
+
+        }
+
+        .carousel-section {
+
+            margin: 40px 0;
+
+        }
+
+        .carousel-title {
+
+            text-align: center;
+
+            font-size: 24px;
+
+            margin-bottom: 10px;
+
+        }
+
+        .carousel-container {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 20px auto;
+
+            width: 80%;
+
+        }
+
+        .carousel {
+
+            display: flex;
+
+            overflow-x: scroll;
+
+            scroll-snap-type: x mandatory;
+
+            gap: 20px;
+
+            scroll-behavior: smooth;
+
+        }
+
+        .card {
+
+            background-color: #333;
+
+            padding: 10px;
+
+            width: 200px;
+
+            text-align: center;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            flex: none;
+
+            scroll-snap-align: center;
+
+        }
+
+        .card img {
+
+            width: 100%;
+
+            border-radius: 8px;
+
+        }
+
+        .carousel-btn {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background-color: rgba(0, 0, 0, 0.7);
+
+            color: white;
+
+            border: none;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            padding: 10px;
+
+        }
+
+        .prev-btn {
+
+            left: 0;
+
+        }
+
+        .next-btn {
+
+            right: 0;
+
+        }
+
+        /* Modal */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.8);
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 1000;
+
+        }
+
+        .modal-content {
+
+            position: relative;
+
+            background-color: transparent;
+
+            color: #fff;
+
+            width: 100%;
+
+            max-width: 100%;
+
+           
+
+            text-align: center;
+
+        }
+
+        .modal-content img {
+
+            width: 100%;
+
+           height:70%;
+
+            object-fit: cover;
+
+        }
+
+        .texto-sobre-imagem {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    padding: 20px;
+    font-size: 12px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+}
+
+
+        .close {
+
+            position: absolute;
+
+            top: 10px;
+
+            right: 20px;
+
+            color: #fff;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            z-index: 1001;
+
+        }
+      .audio-btn {
+
+            position: absolute;
+
+            top: 10px;
+
+            left: 20px;
+
+            background-color: rgba(0, 0, 0, 0.5);
+
+            border: none;
+
+            color: #fff;
+
+            font-size: 16px;
+
+            padding: 10px;
+
+            cursor: pointer;
+
+            border-radius: 50%;
+
+            z-index: 1002;
+
+        }
+
+        /* Estilo para garantir que o modal fique em full-screen no celular */
+
+        @media screen and (max-width: 768px) {
+
+            .modal-content {
+
+                width: 100vw;
+
+                height: 100vh;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Aventuras Bíblicas</h1>
+
+    </header>
+
+    <!-- Seção do Antigo Testamento -->
+
+    <div class="carousel-section">
+
+        <h2 class="carousel-title">Antigo Testamento</h2>
+
+        <div class="carousel-container">
+
+            <button class="carousel-btn prev-btn" onclick="scrollCarousel(-1, 'carousel1')">&#10094;</button>
+
+            <div class="carousel" id="carousel1">
+
+                <div class="card" onclick="abrirHistoria('historia1')">
+
+                    <img src="https://lh3.googleusercontent.com/d/11hbTm9AQudav5DhT_3t1Ep4_bclRK8E2" alt="História 1">
+
+                    <h3>Multiplicação do Azeite </h3>
+
+                </div>
+
+                <div class="card" onclick="abrirHistoria('historia2')">
+
+                    <img src="imagem2.jpg" alt="História 2">
+
+                    <h3>História 2</h3>
+
+                </div>
+
+                <div class="card" onclick="abrirHistoria('historia3')">
+
+                    <img src="imagem3.jpg" alt="História 3">
+
+                    <h3>História 3</h3>
+
+                </div>
+
+            </div>
+
+            <button class="carousel-btn next-btn" onclick="scrollCarousel(1, 'carousel1')">&#10095;</button>
+
+        </div>
+
+    </div>
+
+    <!-- Seção do Novo Testamento -->
+
+    <div class="carousel-section">
+
+        <h2 class="carousel-title">Novo Testamento</h2>
+
+        <div class="carousel-container">
+
+            <button class="carousel-btn prev-btn" onclick="scrollCarousel(-1, 'carousel2')">&#10094;</button>
+
+            <div class="carousel" id="carousel2">
+
+                <div class="card" onclick="abrirHistoria('historia4')">
+
+                    <img src="imagem4.jpg" alt="História 4">
+
+                    <h3>História 4</h3>
+
+                </div>
+
+                <div class="card" onclick="abrirHistoria('historia5')">
+
+                    <img src="imagem5.jpg" alt="História 5">
+
+                    <h3>História 5</h3>
+
+                </div>
+
+                <div class="card" onclick="abrirHistoria('historia6')">
+
+                    <img src="imagem6.jpg" alt="História 6">
+
+                    <h3>História 6</h3>
+
+                </div>
+
+            </div>
+
+            <button class="carousel-btn next-btn" onclick="scrollCarousel(1, 'carousel2')">&#10095;</button>
+
+        </div>
+
+    </div>
+
+    <!-- Modal para mostrar a história -->
+
+    <div id="modal-historia" class="modal">
+
+        <div class="modal-content">
+
+            <span class="close" onclick="fecharHistoria()">&times;</span>
+
+            <img id="imagem-historia" src="" alt="Imagem da História">
+
+            <div class="texto-sobre-imagem" id="texto-historia"></div>
+<audio id="audio-historia" controls style="display: none;"></audio>
+
+            <button class="audio-btn" onclick="toggleAudio()">&#x1F50A;</button>
+
+        
+        </div>
+
+    </div>
+
+    <script>
+
+        // Função para abrir o modal com a história correspondente
+
+        function abrirHistoria(historiaId) {
+
+            const modal = document.getElementById('modal-historia');
+
+            const imagem = document.getElementById('imagem-historia');
+
+            const texto = document.getElementById('texto-historia');
+          const audio = document.getElementById('audio-historia');
+
+            // Adicionar conteúdo dependendo da história
+
+            if (historiaId === 'historia1') {
+
+                imagem.src = 'https://lh3.googleusercontent.com/d/11hbTm9AQudav5DhT_3t1Ep4_bclRK8E2';
+
+                texto.innerHTML = `
+
+  *Eliseu e a Viúva com Azeite*<br>
+
+🌟 Uma viúva de um dos profetas veio a Eliseu, clamando por ajuda. Seu marido havia morrido e deixado dívidas, e agora os credores queriam levar seus dois filhos como escravos para saldar a dívida.<br>
+
+😢 A viúva estava desesperada e não sabia o que fazer. Ela explicou a situação a Eliseu, que lhe perguntou o que ela tinha em casa. Ela respondeu que só tinha um pouco de azeite.<br>
+
+📜 Eliseu disse à viúva que fosse para casa, pedisse emprestadas muitas vasilhas vazias a seus vizinhos e depois fechasse a porta atrás de si e de seus filhos. Ela deveria encher todas as vasilhas com o azeite que tinha, e assim ela fez.<br> 
+
+✨ A viúva obedeceu às instruções de Eliseu. Ela e seus filhos encheram todas as vasilhas com azeite, e o azeite só parou de correr quando todas as vasilhas estavam cheias e não haviam mais para pegarem emprestadas.<br>
+
+💰 Então, a viúva voltou a Eliseu para contar o que havia acontecido. Eliseu disse a ela que vendesse o azeite, pagasse suas dívidas e vivesse do restante com seus filhos.<br>
+
+📖 Referências Bíblicas: 2 Reis 4:1-7<br>
+`;
+                audio.src = 'https://github.com/davidsilvamoraes01/iamge/raw/0b7cf4a24d584ee59429442a8d9ea41ff264ef31/EliseuViuva.mp3';
+audio.load();
+            
+            } else if (historiaId === 'historia2') {
+
+                imagem.src = 'imagem2.jpg';
+
+                texto.textContent = 'Essa é a história da segunda imagem...';
+
+            } else if (historiaId === 'historia3') {
+
+                imagem.src = 'imagem3.jpg';
+
+                texto.textContent = 'Essa é a história da terceira imagem...';
+
+            } else if (historiaId === 'historia4') {
+
+                imagem.src = 'imagem4.jpg';
+
+                texto.textContent = 'Essa é a história da quarta imagem...';
+
+            } else if (historiaId === 'historia5') {
+
+                imagem.src = 'imagem5.jpg';
+
+                texto.textContent = 'Essa é a história da quinta imagem...';
+
+            } else if (historiaId === 'historia6') {
+
+                imagem.src = 'imagem6.jpg';
+
+                texto.textContent = 'Essa é a história da sexta imagem...';
+
+            }
+
+            // Mostrar modal em full screen
+
+            modal.style.display = 'flex';
+
+            document.documentElement.requestFullscreen(); // Forçar full screen
+
+        }
+
+        // Função para fechar o modal
+
+        function fecharHistoria() {
+
+            const modal = document.getElementById('modal-historia');
+
+            modal.style.display = 'none';
+
+            if (document.fullscreenElement) {
+
+                document.exitFullscreen(); // Sair do modo full screen
+
+            }
+
+        }
+
+        // Função para controlar o carrossel
+
+        function scrollCarousel(direction, carouselId) {
+
+            
+
+const carousel = document.querySelector('.carousel');
+
+            const cardWidth = carousel.querySelector('.card').offsetWidth + 20; // Largura do card + gap
+
+            carousel.scrollBy({
+
+                left: direction * cardWidth,
+
+                behavior: 'smooth'
+
+            });
+
+        }
+
+        // Fechar modal ao clicar fora do conteúdo
+
+        window.onclick = function(event) {
+
+            const modal = document.getElementById('modal-historia');
+
+            if (event.target == modal) {
+
+                modal.style.display = 'none';
+
+                if (document.fullscreenElement) {
+
+                    document.exitFullscreen();
+
+                }
+
+            }
+
+        }
+function toggleAudio() {
+
+        const audio = document.getElementById('audio-historia');
+
+        if (audio.paused) {
+
+            audio.play();
+
+        } else {
+
+            audio.pause();
+
+        }
+}
+    
+    </script>
+
+</body>
+
+</html>
